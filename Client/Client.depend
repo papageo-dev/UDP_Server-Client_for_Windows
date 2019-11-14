@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1556985487 source:c:\users\pap geo\desktop\client\client.c
+	<winsock2.h>
+	<stdio.h>
+
+1557676585 source:c:\users\papageorge\desktop\client\client.c
+	<winsock2.h>
+	<stdio.h>
+

@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1556984780 source:c:\users\pap geo\desktop\server\server.c
+	<winsock2.h>
+	<stdio.h>
+
+1557679721 source:c:\users\papageorge\desktop\server\server.c
+	<winsock2.h>
+	<stdio.h>
+	<string.h>
+
+1573694422 source:c:\users\papageorge\desktop\uom 2018-19\паяаккгкос йаи йатамелглемос упокоцислос (i)\еЯЦАСъА 2\server\server.c
+	<winsock2.h>
+	<stdio.h>
+	<string.h>
+
