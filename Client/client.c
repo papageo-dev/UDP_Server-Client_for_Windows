@@ -1,8 +1,6 @@
 #include <winsock2.h>
 #include <stdio.h>
 
-
-
 int main(int argc, char **argv){
 
      WSADATA wsaData;
@@ -37,6 +35,7 @@ int main(int argc, char **argv){
 
      if (SendingSocket == INVALID_SOCKET){
 
+          // Print error message
           printf("Client: Error at socket(): %ld\n", WSAGetLastError());
 
           // Clean up
@@ -51,13 +50,10 @@ int main(int argc, char **argv){
 
 
 
-     // Set up a SOCKADDR_IN structure that will identify who we
-
-     // will send datagrams to. For demonstration purposes, let's
-
-     // assume our receiver's IP address is 127.0.0.1 and waiting
-
-     // for datagrams on port 5150.
+     /*Set up a SOCKADDR_IN structure that will identify who we
+     will send datagrams to.
+     For demonstration purposes, let's assume our receiver's IP address is 127.0.0.1
+     and waiting for datagrams on port 5150.*/
 
      ReceiverAddr.sin_family = AF_INET;
 
@@ -67,7 +63,7 @@ int main(int argc, char **argv){
 
 
 
-     // Send a datagram to the receiver.
+     // Send a datagram to the receiver(Server).
 
      printf("Client: Data to be sent: \"%s\"\n", SendBuf);
      printf("Client: Sending datagrams...\n");
@@ -76,7 +72,7 @@ int main(int argc, char **argv){
      printf("Client: sendto() looks OK!\n");
 
 
-     // Some info on the receiver side...
+     // Print some info on the receiver(Server) side...
 
      // Allocate the required resources
 
@@ -92,7 +88,7 @@ int main(int argc, char **argv){
 
 
 
-     // Some info on the sender side
+     // Print some info on the sender(Client) side...
 
      getpeername(SendingSocket, (SOCKADDR *)&ReceiverAddr, (int *)sizeof(ReceiverAddr));
 
