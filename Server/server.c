@@ -2,8 +2,6 @@
 #include <stdio.h>
 #include <string.h>
 
-#define MAX 5
-
 int main(int argc, char **argv){
 
      WSADATA wsaData;
@@ -20,12 +18,12 @@ int main(int argc, char **argv){
 
    if( WSAStartup(MAKEWORD(2,2), &wsaData) != 0){
 
-        printf("Server: WSAStartup failed with error %ld\n", WSAGetLastError());
+        printf("Server: WSAStartup failed with error: %ld\n", WSAGetLastError());
 
         return -1;
    }
    else{
-        printf("Server: The Winsock DLL status is %s.\n", wsaData.szSystemStatus);
+        printf("Server: The Winsock DLL status is: %s.\n", wsaData.szSystemStatus);
    }
 
      // Create a new socket to receive datagrams on.
@@ -33,6 +31,8 @@ int main(int argc, char **argv){
      ReceivingSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
 
      if (ReceivingSocket == INVALID_SOCKET){
+
+          //Print error message
           printf("Server: Error at socket(): %ld\n", WSAGetLastError());
 
           // Clean up
@@ -45,13 +45,11 @@ int main(int argc, char **argv){
           printf("Server: socket() is OK!\n");
      }
 
-     // Set up a SOCKADDR_IN structure that will tell bind that we
-
-     // want to receive datagrams from all interfaces using port 5150.
+     /*Set up a SOCKADDR_IN structure that will tell bind that
+     we want to receive datagrams from all interfaces using port 5150.*/
 
 
      // The IPv4 family
-
      ReceiverAddr.sin_family = AF_INET;
 
      // Port no. (8888)
@@ -67,6 +65,8 @@ int main(int argc, char **argv){
    // At this point you can receive datagrams on your bound socket.
 
    if (bind(ReceivingSocket, (SOCKADDR *)&ReceiverAddr, sizeof(ReceiverAddr)) == SOCKET_ERROR){
+
+        // Print error message
         printf("Server: Error! bind() failed!\n");
 
         // Close the socket
@@ -83,7 +83,7 @@ int main(int argc, char **argv){
      }
 
 
-   // Some info on the receiver side...
+   // Print some info on the receiver(Server) side...
    getsockname(ReceivingSocket, (SOCKADDR *)&ReceiverAddr, (int *)sizeof(ReceiverAddr));
 
 
@@ -95,24 +95,24 @@ int main(int argc, char **argv){
 
 
    // At this point you can receive datagrams on your bound socket.
-   while (1){
-   ByteReceived = recvfrom(ReceivingSocket, ReceiveBuf, BufLength, 0, (SOCKADDR *)&SenderAddr, &SenderAddrSize);
+   while (1){ // Server is receiving data until you will close it.(You can replace while(1) with a condition to stop receiving.)
 
-   if ( ByteReceived > 0 ){
+        ByteReceived = recvfrom(ReceivingSocket, ReceiveBuf, BufLength, 0, (SOCKADDR *)&SenderAddr, &SenderAddrSize);
 
-        printf("Server: Total Bytes received: %d\n", ByteReceived);
-        printf("Server: The data is \"%s\"\n", ReceiveBuf);
-   }
-   else if ( ByteReceived <= 0 ){
-        printf("Server: Connection closed with error code: %ld\n", WSAGetLastError());
-   }
-   else{
-        printf("Server: recvfrom() failed with error code: %d\n", WSAGetLastError());
-   }
+        if (ByteReceived > 0){ //There are data
+            printf("Server: Total Bytes received: %d\n", ByteReceived);
+            printf("Server: The data is: \"%s\"\n", ReceiveBuf);
+        }
+        else if (ByteReceived <= 0){ //The buffer is empty
+                printf("Server: Connection closed with error code: %ld\n", WSAGetLastError());
+        }
+        else{ //Error
+            printf("Server: recvfrom() failed with error code: %d\n", WSAGetLastError());
+        }
    }
 
 
-   // Some info on the sender side
+   // Print some info on the sender(Client) side...
    getpeername(ReceivingSocket, (SOCKADDR *)&SenderAddr, &SenderAddrSize);
    printf("Server: Sending IP used: %s\n", inet_ntoa(SenderAddr.sin_addr));
    printf("Server: Sending port used: %d\n", htons(SenderAddr.sin_port));
