@@ -1,14 +1,16 @@
 #include <winsock2.h>
 #include <stdio.h>
 
+#define MaxBufferSize 1024
+
 int main(int argc, char **argv){
 
      WSADATA wsaData;
      SOCKET SendingSocket;
      SOCKADDR_IN ReceiverAddr, SrcInfo;
      int Port = 8888;
-     char *SendBuf = "Sending all my love, Sending all my love to youuu!";
      int BufLength = 1024;
+     char *SendBuf[MaxBufferSize];
      int len;
      int TotalByteSent;
 
@@ -63,13 +65,21 @@ int main(int argc, char **argv){
 
 
 
-     // Send a datagram to the receiver(Server).
+     // Send data packages to the receiver(Server).
+     do{
+            printf("\nPlease, type your message: ");
+            fgets(SendBuf, sizeof(SendBuf), stdin);
 
-     printf("Client: Data to be sent: \"%s\"\n", SendBuf);
-     printf("Client: Sending datagrams...\n");
-     TotalByteSent = sendto(SendingSocket, SendBuf, BufLength, 0, (SOCKADDR *)&ReceiverAddr, sizeof(ReceiverAddr));
+            printf("Client: Data to be sent: %s\n", SendBuf);
+            printf("Client: Sending data...\n");
+            TotalByteSent = sendto(SendingSocket, SendBuf, BufLength, 0, (SOCKADDR *)&ReceiverAddr, sizeof(ReceiverAddr));
 
-     printf("Client: sendto() looks OK!\n");
+            printf("Client: sendto() looks OK!\n");
+
+      /*Program is asking user for messages and sending the to Server,until you will close it.
+      (You can replace while(1) with a condition to stop asking/sending messages.)*/
+     }while(1);
+
 
 
      // Print some info on the receiver(Server) side...
