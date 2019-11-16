@@ -91,7 +91,7 @@ int main(int argc, char **argv){
 
    printf("Server: Receiving port used: %d\n", htons(ReceiverAddr.sin_port));
 
-   printf("Server: I\'m ready to receive a datagram...\n");
+   printf("Server: I\'m ready to receive data packages. Waiting...\n\n");
 
 
    // At this point you can receive datagrams on your bound socket.
@@ -99,14 +99,15 @@ int main(int argc, char **argv){
 
         ByteReceived = recvfrom(ReceivingSocket, ReceiveBuf, BufLength, 0, (SOCKADDR *)&SenderAddr, &SenderAddrSize);
 
-        if (ByteReceived > 0){ //There are data
+        if (ByteReceived > 0){ //If there are data
             printf("Server: Total Bytes received: %d\n", ByteReceived);
-            printf("Server: The data is: \"%s\"\n", ReceiveBuf);
+            printf("Server: The data is: %s\n", ReceiveBuf);
+            printf("\n");
         }
-        else if (ByteReceived <= 0){ //The buffer is empty
+        else if (ByteReceived <= 0){ //If the buffer is empty
                 printf("Server: Connection closed with error code: %ld\n", WSAGetLastError());
         }
-        else{ //Error
+        else{ //If error
             printf("Server: recvfrom() failed with error code: %d\n", WSAGetLastError());
         }
    }
