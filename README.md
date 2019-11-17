@@ -14,21 +14,21 @@
     
 # Description
 
- This is a communication model between Server and Client(s) with User Datagram Protocol(UDP) , that runs on
+ This is a communication model between Server and Client(s) with User Datagram Protocol(UDP), that runs on
  Windows operating systems with the help of <winsock2.h> library.                                             
                                                                                                                      
 # Server
 
  This is a UDP Server, written in C programming language, that can run on Windows operating systems, 
- with the help of <winsock2.h> library.
+ with the help of <winsock2.h> library.                                                                                  
  It can accept more than one parallel communications with Clients, sending messages and receiving data packets from them.
- Program is also informs user(Server Administrator), with messages(Success, Error, etc).                                         
- (You can find more information in comments in the source code file "server.c".)                                         
+ Program is also informs user(Server Administrator), with messages(Success, Error, etc).                                                                            
+ (You can find more information in comments in the source code file "server.c".)                                                                                 
  
  # Client
 
  This is a UDP Client, written in C programming language, that can run on Windows operating systems, 
- with the help of <winsock2.h> library.
- It connects with a Server, asks user for data packages(messages) and send them to a receiver(Server).
- Program is also informs user(Client), with messages(Success, Error, etc).                                 
- (You can find more information in comments in the source code file "client.c".)   
+ with the help of <winsock2.h> library.                                                               
+ It connects with a Server, asks user for data packages(messages) and send them to a receiver(Server).             
+ Program is also informs user(Client), with messages(Success, Error, etc).                                                           
+ (You can find more information in comments in the source code file "client.c".)                               
