@@ -1,6 +1,6 @@
 # UDP Server/Client for Windows
 
- UDP Server/Client for Windows, with Winsock 2.2.
+ UDP Server/Client for Windows in C programming language, with Winsock 2.2.
 
 # Code Information
 
