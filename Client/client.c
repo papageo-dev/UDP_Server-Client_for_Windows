@@ -67,13 +67,16 @@ int main(int argc, char **argv){
 
      // Send data packages to the receiver(Server).
      do{
-            printf("\nPlease, type your message: ");
-            fgets(SendBuf, sizeof(SendBuf), stdin);
+            printf("\nPlease, type your message: "); //Ask user for message
+            fgets(SendBuf, sizeof(SendBuf), stdin); //Read user's input
 
+            //Print user's input and a progress message
             printf("Client: Data to be sent: %s\n", SendBuf);
             printf("Client: Sending data...\n");
-            TotalByteSent = sendto(SendingSocket, SendBuf, BufLength, 0, (SOCKADDR *)&ReceiverAddr, sizeof(ReceiverAddr));
 
+            //Send message to receiver(Server)
+            TotalByteSent = sendto(SendingSocket, SendBuf, BufLength, 0, (SOCKADDR *)&ReceiverAddr, sizeof(ReceiverAddr));
+            //Print success message
             printf("Client: sendto() looks OK!\n");
 
       /*Program is asking user for messages and sending the to Server,until you will close it.
