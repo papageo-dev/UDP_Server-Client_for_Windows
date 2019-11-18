@@ -100,14 +100,17 @@ int main(int argc, char **argv){
         ByteReceived = recvfrom(ReceivingSocket, ReceiveBuf, BufLength, 0, (SOCKADDR *)&SenderAddr, &SenderAddrSize);
 
         if (ByteReceived > 0){ //If there are data
+            //Print information for received data
             printf("Server: Total Bytes received: %d\n", ByteReceived);
             printf("Server: The data is: %s\n", ReceiveBuf);
             printf("\n");
         }
         else if (ByteReceived <= 0){ //If the buffer is empty
-                printf("Server: Connection closed with error code: %ld\n", WSAGetLastError());
+            //Print error message
+            printf("Server: Connection closed with error code: %ld\n", WSAGetLastError());
         }
         else{ //If error
+            //Print error message
             printf("Server: recvfrom() failed with error code: %d\n", WSAGetLastError());
         }
    }
